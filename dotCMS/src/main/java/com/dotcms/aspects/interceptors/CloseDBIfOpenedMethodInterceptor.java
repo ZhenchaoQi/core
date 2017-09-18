@@ -18,24 +18,6 @@ public class CloseDBIfOpenedMethodInterceptor implements MethodInterceptor<Objec
 
     @Override
     public Object invoke(final DelegateMethodInvocation<Object> delegate) throws Throwable {
-
-        final boolean isNewConnection = !DbConnectionFactory.connectionExists();
-
-        final CloseDBIfOpened closeDB =
-                getMethodAnnotation(delegate.getMethod(), CloseDBIfOpened.class);
-        Object methodReturn = null;
-
-        try {
-            methodReturn = delegate.proceed();
-        } finally {
-
-            if (null != closeDB && closeDB.connection()
-                    && isNewConnection) {
-
-                DbConnectionFactory.closeSilently();
-            }
-        }
-
-        return methodReturn;
+        return delegate.proceed();
     } // invoke.
 } // E:O:F:LogTimeMethodInterceptor.
