@@ -44,11 +44,8 @@ public class LocalTransaction {
             handleException(isLocalTransaction, e);
         } finally {
 
-            if (isLocalTransaction) {
-                DbConnectionFactory.setAutoCommit(autoCommit);
-            }
-
             if (isNewConnection) {
+                DbConnectionFactory.setAutoCommit(true);
                 DbConnectionFactory.closeConnection();
             }
         }
@@ -90,11 +87,8 @@ public class LocalTransaction {
             handleException(isLocalTransaction, e);
         } finally {
 
-            if (isLocalTransaction) {
-                DbConnectionFactory.setAutoCommit(autoCommit);
-            }
-
             if (isNewConnection) {
+                DbConnectionFactory.setAutoCommit(true);
                 DbConnectionFactory.closeConnection();
             }
         }
